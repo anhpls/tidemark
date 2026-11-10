@@ -17,7 +17,15 @@ def on_open(ws):
 
 # runs every time coinbase sends a msg
 def on_message(ws, msg: str):
-    print(msg[:300])
+    data = json.loads(msg) # load into dict from string
+
+    if data["channel"] != "l2_data": # skip anything that isn't order book data
+        return 
+
+    for event in data["events"]:
+        for update in event["updates"]:
+            print(event["type"], update["side"], update["price_level"], update["new_quantity"])
+        
 
 # create connection to URL and run connect func
 ws = websocket.WebSocketApp(COINBASE_URL, on_open=on_open, on_message=on_message)

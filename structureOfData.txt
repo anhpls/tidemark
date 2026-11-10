@@ -1,0 +1,9 @@
+anhpls@anhpls-2 tidemark % /Users/anhpls/Desktop/SWE/projects/tidemark/venv/bin/python /Users/anhpls/Desktop/SWE/pro
+jects/tidemark/stream.py
+Connected!
+{"channel":"l2_data","timestamp":"2026-11-10T03:09:21.743096555Z","sequence_num":0,"events":[{"type":"snapshot","product_id":"BTC-USD","updates":[{"side":"bid","event_time":"2026-11-10T03:09:21.447531Z","price_level":"74714.01","new_quantity":"0.126499"},{"side":"bid","event_time":"2026-11-10T03:09:
+{"channel":"l2_data","timestamp":"2026-11-10T03:09:21.762077677Z","sequence_num":1,"events":[{"type":"update","product_id":"BTC-USD","updates":[{"side":"bid","event_time":"2026-11-10T03:09:21.529855Z","price_level":"74714.01","new_quantity":"0.12649868"},{"side":"bid","event_time":"2026-11-10T03:09:
+{"channel":"l2_data","timestamp":"2026-11-10T03:09:21.762652558Z","sequence_num":2,"events":[{"type":"update","product_id":"BTC-USD","updates":[{"side":"bid","event_time":"2026-11-10T03:09:21.555375Z","price_level":"74697","new_quantity":"0"},{"side":"bid","event_time":"2026-11-10T03:09:21.555375Z",
+
+Notes:
+timestamps, sequence_num is incremental, type = snapshot/update, side = bid/offer, price_level = 74697 (text format), new_quantity = 0 means price level is gone

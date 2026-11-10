@@ -1,14 +1,26 @@
-# 1. import the websocket library
+# import websocket lib
 import websocket
-# 2. save the coinbase address in a variable
+import json
+# save coinbase address
 COINBASE_URL = "wss://advanced-trade-ws.coinbase.com"
 
-# 3. write a function that runs when we connect
+# connect
 def on_open(ws):
     print("Connected!")
- 
-# 4. create the connection and give it the address + your function
+    subscribe_message = {
+        "type": "subscribe",
+        "product_ids": ["BTC-USD"],
+        "channel": "level2"
+    }
+    subscribe_text = json.dumps(subscribe_message) # make dictionary into text
+    ws.send(subscribe_text) # pass the text
+
+def on_message():
+    pass
+
+# create connection to URL and run connect func
 ws = websocket.WebSocketApp(COINBASE_URL, on_open=on_open)
 
-# 5. start it and keep it running
+# start and keep running
 ws.run_forever()
+

@@ -4,7 +4,7 @@ import json
 # save coinbase address
 COINBASE_URL = "wss://advanced-trade-ws.coinbase.com"
 
-# connect
+# runs once we connect; subscribe to the BTC order book
 def on_open(ws):
     print("Connected!")
     subscribe_message = {
@@ -15,11 +15,12 @@ def on_open(ws):
     subscribe_text = json.dumps(subscribe_message) # make dictionary into text
     ws.send(subscribe_text) # pass the text
 
-def on_message():
-    pass
+# runs every time coinbase sends a msg
+def on_message(ws, msg: str):
+    print(msg[:300])
 
 # create connection to URL and run connect func
-ws = websocket.WebSocketApp(COINBASE_URL, on_open=on_open)
+ws = websocket.WebSocketApp(COINBASE_URL, on_open=on_open, on_message=on_message)
 
 # start and keep running
 ws.run_forever()

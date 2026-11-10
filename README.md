@@ -21,14 +21,6 @@ Best Bid: 74707.96  Best Offer: 74708.12  Spread: 0.16
 Best Bid: 74707.96  Best Offer: 74708.05  Spread: 0.09
 ```
 
-## How it works
-
-Coinbase sends one big snapshot message with the whole order book, then a stream of small "update" messages. Each update says "the amount at this price on this side is now X". If X is 0, that price level is gone.
-
-The book is two dictionaries (`bids` and `offers`) that map price -> quantity. The best bid is the highest price in `bids` and the best offer is the lowest price in `offers`.
-
-Every message has a `sequence_num` that should go up by exactly 1. If it jumps, a message was lost and the book might be wrong, so the program prints a warning. (I tested this by skipping a message on purpose.)
-
 ## How to run it
 
 ```bash

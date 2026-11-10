@@ -6,6 +6,7 @@ COINBASE_URL = "wss://advanced-trade-ws.coinbase.com"
 
 bids = {} # populate with active bids
 offers = {} # populate with active offers
+latest_sequence_num = None # keep track of latest sequence num
 
 # update book with incoming data of offer/bid + price + quantity
 def update_book(side, price, quantity):
@@ -32,7 +33,17 @@ def on_open(ws):
 
 # runs every time coinbase sends a msg
 def on_message(ws, msg: str):
+    global latest_sequence_num
     data = json.loads(msg) # load into dict from string
+    seq_num = data["sequence_num"]
+
+    if seq_num == 50:
+        return
+
+    if latest_sequence_num is not None and seq_num != latest_sequence_num + 1:
+        print(f"Error: Expected {latest_sequence_num + 1} but got {seq_num}")
+
+    latest_sequence_num = seq_num
 
     if data["channel"] != "l2_data": # skip anything that isn't order book data
         return 
